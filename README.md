@@ -26,7 +26,7 @@ A : Impossible. Because our software uses Roblox's official API, it is legal to 
 
 Q : On what OSes your software is available?
 
-A : Our software is Windows-only. If you're using Linux, try running it with Wine.
+A : Our software is Windows-only right now.
 
 Q : Why your software is only available on Windows and not Mac OS?
 
@@ -34,4 +34,4 @@ A : I don't have a Mac to test a possible version of our software on MacOS, so I
 
 Q : And for Linux?
 
-A : Roblox and Roblox Studio are not available on Linux. Tools like Sober and VinegarHQ don’t fully respect Roblox’s Terms of Use.
+A : I'm working on a possible Linux version for aarch64 and x86_64 architectures.

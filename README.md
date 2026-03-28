@@ -1,7 +1,7 @@
 # RobloxID-Finder
 Find any Roblox user's **User ID** instantly by just typing their username.
 
-⚠️ I'm currently working on a native Linux version (will be available for aarch64 and x86_64 architectures)
+⚠️ I'm currently working on a native Linux version (will be available for aarch64 and x86_64 architectures) and a Windows ARM (aarch64) version. (If you have an aarch64 device on Windows and want to use this software, use the x86_64 exe and Windows will emulate x86_64 for you)
 
 ⚠️ WARN - If Windows Defender says that our software is a malware, ignore the notification.
 --

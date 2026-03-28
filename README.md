@@ -4,6 +4,7 @@
 Find any Roblox user's **User ID** instantly by just typing their username.
 This project is under the MIT Licence: feel free to use our software and edit it.
 
+Downloads on SourceForge:
 <a href="https://sourceforge.net/projects/robloxid-finder/">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Sourceforge_logo.svg/960px-Sourceforge_logo.svg.png?_=20200405153227" width="200">
 </a>

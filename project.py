@@ -1,108 +1,73 @@
+import customtkinter as ctk
 import requests
 import pyperclip
-import keyboard
-import os
-import socket
-import subprocess
 import webbrowser
-from colorama import Fore, init
+import sys
+import os
 
-init(autoreset=True)
+# ----------- App Appearance -----------
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("blue")
 
-def check_internet():
-    try:
-        socket.create_connection(("8.8.8.8", 53), timeout=3)
-        return True
-    except OSError:
-        return False
+app = ctk.CTk()
+app.title("Roblox ID Finder")
+app.geometry("450x300")
 
-def check_wifi_capability():
-    if os.name == "nt":
-        try:
-            output = subprocess.check_output("netsh wlan show drivers", shell=True, encoding="utf-8")
-            return "Wireless LAN" in output or "Wi-Fi" in output
-        except Exception:
-            return False
-    return False
+# ---------- Load Icon for GUI ----------
+if getattr(sys, 'frozen', False):
+    # PyInstaller bundle
+    base_path = sys._MEIPASS
+else:
+    base_path = os.path.dirname(__file__)
 
-def wifi_enable():
-    try:
-        os.system("netsh interface set interface name=\"Wi-Fi\" admin=enabled")
-        print(f"{Fore.GREEN}📶 Wi-Fi adapter enabled.")
-    except Exception as e:
-        print(f"{Fore.RED}⚠️ Could not enable Wi-Fi: {e}")
+icon_path = os.path.join(base_path, "mon_logo.ico")
+try:
+    app.iconbitmap(icon_path)
+except Exception:
+    pass  # fallback si l'icône n'est pas trouvée
 
-def internet_check_screen():
-    print(f"{Fore.RED}Your PC is not connected to Internet.")
-    print("This software requires Internet to work, because it contacts Roblox's official API to get your UserID.\n")
-    print(f"{Fore.YELLOW}Press ALT + F4 to close the window")
+# ---------- UI Elements ----------
+label = ctk.CTkLabel(app, text="Enter Roblox username:", font=("Roboto", 14))
+label.pack(pady=15)
 
-    if check_wifi_capability():
-        print(f"{Fore.CYAN}Press ALT + K to enable Wi-Fi")
+entry = ctk.CTkEntry(app, width=300, placeholder_text="Username")
+entry.pack(pady=5)
 
-    while True:
-        if keyboard.is_pressed("alt+f4"):
-            print(f"{Fore.MAGENTA}👋 Closing...")
-            exit()
-        if keyboard.is_pressed("alt+k") and check_wifi_capability():
-            wifi_enable()
+result_label = ctk.CTkLabel(app, text="", font=("Roboto", 16))
+result_label.pack(pady=15)
 
-def get_user_id(username):
+# ---------- Functions ----------
+def find_id():
+    username = entry.get().strip()
+    if not username:
+        result_label.configure(text="⚠ Invalid username.")
+        return
+
     url = "https://users.roblox.com/v1/usernames/users"
     payload = {"usernames": [username], "excludeBannedUsers": False}
 
     try:
         response = requests.post(url, json=payload, timeout=5)
-        response.raise_for_status()
         data = response.json()
-
         if data["data"]:
             user_id = data["data"][0]["id"]
-            print(f"{Fore.GREEN}✅ {username}: {user_id}")
-            return str(user_id)
+            result_label.configure(text=f"ID: {user_id}")
         else:
-            print(f"{Fore.RED}❌ Username not found: {username}")
-            return None
-    except requests.exceptions.RequestException as e:
-        print(f"{Fore.RED}⚠️ Network error: {e}")
-        return None
+            result_label.configure(text="❌ User not found.")
+    except Exception:
+        result_label.configure(text="⚠ Network error. Check your connection.")
 
-def wait_for_key(user_id):
-    print(f"\n{Fore.CYAN}Press ALT+C to copy User ID")
-    print(f"{Fore.YELLOW}Press ALT+X to restart")
-    print(f"{Fore.MAGENTA}Press ALT+D to join Discord server")
-    print(f"{Fore.RED}Press SPACE to quit\n")
+def copy_id():
+    text = result_label.cget("text")
+    if text.startswith("ID:"):
+        pyperclip.copy(text.split("ID: ")[1])
+        result_label.configure(text="✅ ID copied!")
 
-    while True:
-        if keyboard.is_pressed('alt+c'):
-            pyperclip.copy(user_id)
-            print(f"{Fore.GREEN}📋 Copied to clipboard!")
-            break
-        elif keyboard.is_pressed('alt+x'):
-            print(f"{Fore.CYAN}🔄 Restarting...\n")
-            os.system('cls' if os.name == 'nt' else 'clear')
-            main()
-            break
-        elif keyboard.is_pressed('alt+d'):
-            webbrowser.open("https://discord.gg/gxwEa4fGBf")
-            print(f"{Fore.BLUE}🌐 Opening Discord server...")
-        elif keyboard.is_pressed('space'):
-            print(f"{Fore.MAGENTA}👋 Quitting...")
-            break
+# ---------- Buttons ----------
+btn_find = ctk.CTkButton(app, text="Find ID", command=find_id, width=200)
+btn_find.pack(pady=10)
 
-def main():
-    while True:
-        username = input("Enter Roblox username: ").strip()
-        if len(username) < 3 or len(username) > 20:
-            continue
-        user_id = get_user_id(username)
-        if user_id:
-            wait_for_key(user_id)
-            break
+btn_copy = ctk.CTkButton(app, text="Copy ID to clipboard", command=copy_id, width=200)
+btn_copy.pack(pady=10)
 
-if __name__ == "__main__":
-    if not check_internet():
-        internet_check_screen()
-    else:
-        print(f"{Fore.GREEN}✅ Internet OK, launching Roblox ID Finder...\n")
-        main()
+app.mainloop()

@@ -6,6 +6,10 @@ This project is under the MIT Licence: feel free to use our software and edit it
 
 **This project's logo is based of the Sober logo. Thanks to the Sober team!**
 
+<a href="https://sourceforge.net/projects/robloxid-finder/">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Sourceforge_logo.svg/960px-Sourceforge_logo.svg.png?_=20200405153227" width="200">
+</a>
+
 https://commons.wikimedia.org/wiki/File%3ASober.svg
 
 ⚠️ I'm currently working on a native Linux version (will be available for aarch64 and x86_64 architectures) and a Windows ARM (aarch64) version. (If you have an aarch64 device on Windows and want to use this software, use the x86_64 exe and Windows will emulate x86_64 for you)

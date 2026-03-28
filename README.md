@@ -22,7 +22,7 @@ https://commons.wikimedia.org/wiki/File%3ASober.svg
 --
 Q : How to use the software?
 
-A : Download the .exe file (use Wine if you're on Linux) from the releases (V1 and V2 are both stable), execute, type your Roblox username, then press ALT + C to copy it, and you can now use it everywhere you want (examples: Roblox Studio / Luau code)
+A : Download the .exe file (use Wine if you're on Linux) from the releases (All releases, except pre-releases, are all stable), execute, type your Roblox username, then press ALT + C to copy it (V1 and V2), and you can now use it everywhere you want (examples: Roblox Studio / Luau code)
 
 Q : Do I need Internet to use the software?
 
@@ -43,3 +43,9 @@ A : I don't have a Mac to test a possible version of our software on MacOS, so I
 Q : And for Linux?
 
 A : I'm working on a possible Linux version for aarch64 and x86_64 architectures.
+
+If you want to use Roblox Studio on Linux, you should look at the [VinegarHQ project](https://flathub.org/apps/org.vinegarhq.Vinegar), which is free and open-source.
+
+To use normal Roblox client on Linux, you should look at the [Sober project](https://flathub.org/apps/org.vinegarhq.Sober), which is free and made by the VinegarHQ Team.
+
+I am not affiliated with these projects, these are just my recommendations.

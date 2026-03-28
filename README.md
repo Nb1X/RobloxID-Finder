@@ -4,6 +4,9 @@
 Find any Roblox user's **User ID** instantly by just typing their username.
 This project is under the MIT Licence: feel free to use our software and edit it.
 
+**This project's logo is based of the Sober logo. Thanks to the Sober team!**
+https://commons.wikimedia.org/wiki/File%3ASober.svg?
+
 ⚠️ I'm currently working on a native Linux version (will be available for aarch64 and x86_64 architectures) and a Windows ARM (aarch64) version. (If you have an aarch64 device on Windows and want to use this software, use the x86_64 exe and Windows will emulate x86_64 for you)
 
 ⚠️ WARN - If Windows Defender says that our software is a malware, ignore the notification.
